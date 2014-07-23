@@ -26,7 +26,7 @@ into the story description. The tool extracts these to generate a backward depen
 * GraphViz 2.38.0
 
 ## Building
-(Sbt)[http://www.scala-sbt.org/] builds a single executable fatjar with all the dependencies in it:-
+[Sbt](http://www.scala-sbt.org/) builds a single executable fatjar with all the dependencies in it:-
 
 ```
 ./sbt assembly
@@ -45,7 +45,7 @@ export MINGLE_SERVER=<your_server_here>
 export MINGLE_MQL_PATH=/api/v2/projects/<project_name>/cards/execute_mql.xml
 
 # To search the entire corpus of stories and extract dependencies
-java -jar java -jar target/MingleDependencies-assembly-1.0.1-SNAPSHOT.jar storyRange 1,<max_story_number>
+java -jar target/MingleDependencies-assembly-1.0.1-SNAPSHOT.jar storyRange 1,<max_story_number>
 # Or to selectively process stories
 #java -jar target/MingleDependencies-assembly-1.0.1-SNAPSHOT.jar stories 4345,4349,4717,4897,5027,5092,5120,5071,5109,5119
 
