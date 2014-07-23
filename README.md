@@ -2,9 +2,9 @@
 
 ## Overview
 A tool for generating a dependency graph between stories for better visualisation of the order stories should be played.
-This was tested using a self-hosted version of Mingle, rather than a cloud-hosted version (but it may work there too).
+This was tested using a self-hosted version of Mingle 13_2_1, rather than a cloud-hosted version (but it may work there too).
 
-It produces a [Dot](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) file, which GraphViz can then turn into a GIF.
+It produces a [Dot](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) file, which [GraphViz](http://www.graphviz.org) can then turn into a GIF.
 
 To mark up your stories for this, please put
 
@@ -35,7 +35,7 @@ mvn package
 
 ## Running
 
-You'll want a copy of [GraphViz](http://www.graphviz.org) installed. For a Mac, try `brew install graphviz`.
+You'll want a copy of GraphViz installed. For a Mac, try `brew install graphviz`.
 
 To run:-
 ```
@@ -46,9 +46,9 @@ export MINGLE_SERVER=<your_server_here>
 export MINGLE_MQL_PATH=/api/v2/projects/<project_name>/cards/execute_mql.xml
 
 # To search the entire corpus of stories and extract dependencies
-java -jar java -jar target/MingleDependencies-1.0.0-SNAPSHOT-jar-with-dependencies.jar storyRange 1,<max_story_number>
+java -jar java -jar target/MingleDependencies-1.0.0-jar-with-dependencies.jar storyRange 1,<max_story_number>
 # Or to selectively process stories
-#java -jar target/MingleDependencies-1.0.0-SNAPSHOT-jar-with-dependencies.jar stories 4345,4349,4717,4897,5027,5092,5120,5071,5109,5119
+#java -jar target/MingleDependencies-1.0.0-jar-with-dependencies.jar stories 4345,4349,4717,4897,5027,5092,5120,5071,5109,5119
 
 # This produces a DOT file for GraphViz which can be changed into a GIF with
 dot -Tgif -O dependency-graph.dot
