@@ -2,7 +2,7 @@
 
 ## Overview
 A tool for generating a dependency graph between stories for better visualisation of the order stories should be played.
-This was tested using a self-hosted version of Mingle 13_2_1, rather than a cloud-hosted version (but it may work there too).
+This was tested using a self-hosted version of [Mingle](http://www.thoughtworks.com/products/mingle-agile-project-management) 13_2_1, rather than a cloud-hosted version (but it may work there too).
 
 It produces a [Dot](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) file, which [GraphViz](http://www.graphviz.org) can then turn into a GIF.
 
