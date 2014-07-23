@@ -4,7 +4,7 @@ import sbtassembly.Plugin._
 
 object BuildSettings {
   val buildOrganization = "uk.co.devsoup"
-  val buildVersion      = "1.0.1-SNAPSHOT"
+  val buildVersion      = "1.0.2"
   val buildScalaVersion = "2.11.1"
 
   val buildSettings = Seq (
