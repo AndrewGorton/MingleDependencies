@@ -4,7 +4,7 @@
 A tool for generating a dependency graph between stories for better visualisation of the order stories should be played.
 This was tested using a self-hosted version of Mingle 13_2_1, rather than a cloud-hosted version (but it may work there too).
 
-It produces a [Dot](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) file, which GraphViz can then turn into a GIF.
+It produces a [Dot](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) file, which [GraphViz](http://www.graphviz.org) can then turn into a GIF.
 
 To mark up your stories for this, please put
 
@@ -35,7 +35,7 @@ mvn package
 
 ## Running
 
-You'll want a copy of [GraphViz](http://www.graphviz.org) installed. For a Mac, try `brew install graphviz`.
+You'll want a copy of GraphViz installed. For a Mac, try `brew install graphviz`.
 
 To run:-
 ```
