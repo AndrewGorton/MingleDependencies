@@ -46,9 +46,9 @@ export MINGLE_SERVER=<your_server_here>
 export MINGLE_MQL_PATH=/api/v2/projects/<project_name>/cards/execute_mql.xml
 
 # To search the entire corpus of stories and extract dependencies
-java -jar java -jar target/MingleDependencies-1.0.0-SNAPSHOT-jar-with-dependencies.jar storyRange 1,<max_story_number>
+java -jar java -jar target/MingleDependencies-1.0.0-jar-with-dependencies.jar storyRange 1,<max_story_number>
 # Or to selectively process stories
-#java -jar target/MingleDependencies-1.0.0-SNAPSHOT-jar-with-dependencies.jar stories 4345,4349,4717,4897,5027,5092,5120,5071,5109,5119
+#java -jar target/MingleDependencies-1.0.0-jar-with-dependencies.jar stories 4345,4349,4717,4897,5027,5092,5120,5071,5109,5119
 
 # This produces a DOT file for GraphViz which can be changed into a GIF with
 dot -Tgif -O dependency-graph.dot
