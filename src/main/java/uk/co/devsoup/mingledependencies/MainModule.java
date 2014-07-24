@@ -1,21 +1,24 @@
 package uk.co.devsoup.mingledependencies;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.PrintWriter;
 import java.util.*;
 
 public class MainModule {
     public static final Logger LOGGER = LoggerFactory.getLogger(MainModule.class);
 
     public static void main(String args[]) {
-        new MainModule().run(args);
+        boolean success = new MainModule().run(args);
+        if (success) {
+            System.exit(0);
+        }
+        System.exit(-1);
     }
 
-    public void run(final String args[]) {
+    public boolean run(final String args[]) {
         LOGGER.info("Application startup");
+        boolean successfulExecution = false;
 
         Set<Integer> storiesToProcess = null;
 
@@ -34,15 +37,16 @@ public class MainModule {
         if (canProcess) {
             Map<Integer, StoryDetails> storyDetails = new HashMap<Integer, StoryDetails>();
             Map<Integer, List<Integer>> dependencies = new HashMap<Integer, List<Integer>>();
-            new Mingle().generateDependencies(storiesToProcess, storyDetails, dependencies);
-
-            new DotFileGenerator().generateOutput(storyDetails, dependencies);
-        } else
-
-        {
+            boolean success = new Mingle().generateDependencies(storiesToProcess, storyDetails, dependencies);
+            if (success) {
+                new DotFileGenerator().generateOutput(storyDetails, dependencies);
+                successfulExecution = true;
+            }
+        } else {
             printHelp();
         }
         LOGGER.info("Application shutdown");
+        return successfulExecution;
     }
 
     private void printHelp() {
@@ -54,7 +58,7 @@ public class MainModule {
     }
 
     private Set<Integer> parseStories(final String stringToProcess) {
-        Set<Integer> result = new HashSet<Integer>();
+        Set<Integer> result = new TreeSet<Integer>();
 
         String[] split = stringToProcess.split(",");
         for (String singleString : split) {
@@ -65,7 +69,7 @@ public class MainModule {
     }
 
     private Set<Integer> parseStoryRange(final String stringToProcess) {
-        Set<Integer> result = new HashSet<Integer>();
+        Set<Integer> result = new TreeSet<Integer>();
 
         String[] split = stringToProcess.split(",");
         int start = Integer.parseInt(split[0]);

@@ -16,9 +16,10 @@ public class Mingle {
     }
 
 
-    public void generateDependencies(final Set<Integer> storiesToProcess,
+    public boolean generateDependencies(final Set<Integer> storiesToProcess,
                                      final Map<Integer, StoryDetails> storyDetails,
                                      final Map<Integer, List<Integer>> dependencies) {
+        boolean success = false;
 
         if (storiesToProcess.size() < 10) {
             threadpool.submit(new GenerateDependenciesWorker(storiesToProcess, storyDetails, dependencies));
@@ -50,5 +51,11 @@ public class Mingle {
                 // Don't care
             }
         }
+
+        if(!GenerateDependenciesWorker.isErrored()) {
+            success = true;
+        }
+
+        return success;
     }
 }

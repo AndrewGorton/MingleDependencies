@@ -33,6 +33,7 @@ public class GenerateDependenciesWorker implements Runnable {
     private Map<Integer, List<Integer>> dependencies;
     // Used to protect the above
     private static final Object LOCK_OBJECT = new Object();
+    private static boolean errored = false;
 
     private static final String DEFAULT_STATUS = "unknown";
 
@@ -60,9 +61,25 @@ public class GenerateDependenciesWorker implements Runnable {
 
     }
 
+    public static boolean isErrored() {
+        return errored;
+    }
+
     @Override
     public void run() {
         try {
+            // If some other thread has already errored, give up
+            if(errored) {
+                return;
+            }
+
+            List<Integer> myList = new ArrayList<Integer>();
+            for(Integer tempStory : storiesToProcess) {
+                myList.add(tempStory);
+            }
+            Collections.sort(myList);
+            LOGGER.debug(String.format("Processing stories from '%d' to '%d'", myList.get(0), myList.get(myList.size()-1)));
+
             String storyList = StringUtils.join(storiesToProcess, ",");
             URI uri = new URIBuilder()
                     .setScheme(mingle_server_scheme)
@@ -78,6 +95,12 @@ public class GenerateDependenciesWorker implements Runnable {
             CloseableHttpClient client = HttpClients.createDefault();
             LOGGER.debug("Querying server for story information");
             CloseableHttpResponse response = client.execute(request);
+
+            // If another thread has errored, don't bother processing the response
+            if(errored) {
+                return;
+            }
+
             HttpEntity entity = response.getEntity();
             String responseBody = EntityUtils.toString(entity);
             LOGGER.debug("Processing response");
@@ -109,9 +132,9 @@ public class GenerateDependenciesWorker implements Runnable {
                 }
 
                 processStory(storyMeta, storyDetails, dependencies);
-
             }
         } catch (Exception e) {
+            errored = true;
             LOGGER.error(e.getMessage());
             LOGGER.debug(ExceptionUtils.getStackTrace(e));
         }
