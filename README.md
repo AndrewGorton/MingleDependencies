@@ -66,5 +66,5 @@ You may want to tailor the statuses listed at the top of the DotFileGenerator wh
 2. Split the dependency graph into a single graph for each dependency set
 3. Provide forward and backward dependencies.
 4. Automatically query stories which are listed as dependencies, but are not listed in the "stories" parameter
-5. Handle errors from child worker threads which query Mingle better (eg to avoid producing a partial Dot file.
+5. ~~Handle errors from child worker threads which query Mingle better (eg to avoid producing a partial Dot file.~~
 
